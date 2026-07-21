@@ -8,6 +8,7 @@ import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OrderBy;
+import za.co.lz.domain.tournament.round.Round;
 
 @Entity
 public class KnockoutStageDetails {

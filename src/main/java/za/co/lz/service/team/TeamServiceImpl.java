@@ -26,12 +26,15 @@ public class TeamServiceImpl implements ITeamService {
     }
 
     @Override
-    public Team update(Team team, UUID uuid) {
+    public Team update(Team team, UUID teamId) {
+        if (teamId == null) {
+            return team;
+        }
         return teamRepository.save(team);
     }
 
     @Override
-    public void delete(UUID uuid) {
-        this.teamRepository.deleteById(uuid);
+    public void delete(UUID teamId) {
+        this.teamRepository.deleteById(teamId);
     }
 }

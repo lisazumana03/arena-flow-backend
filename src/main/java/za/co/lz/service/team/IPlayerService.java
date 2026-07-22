@@ -1,4 +1,9 @@
 package za.co.lz.service.team;
 
-public interface IPlayerService {
+import za.co.lz.domain.team.Player;
+import za.co.lz.service.IService;
+
+import java.util.UUID;
+
+public interface IPlayerService extends IService<Player, UUID> {
 }

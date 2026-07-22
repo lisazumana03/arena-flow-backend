@@ -1,5 +1,7 @@
 package za.co.lz.controller.team;
 
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,5 +21,4 @@ public class TeamController {
         return ResponseEntity.ok(createdTeam);
     }
 
-    @DeleteMapping("/delete/{id}")
 }

@@ -1,11 +1,10 @@
-package za.co.lz.service;
+package za.co.lz.service.team;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import za.co.lz.domain.team.Team;
-import za.co.lz.repository.TeamRepository;
-import za.co.lz.service.team.ITeamService;
+import za.co.lz.repository.team.TeamRepository;
 
 import java.util.List;
 import java.util.UUID;

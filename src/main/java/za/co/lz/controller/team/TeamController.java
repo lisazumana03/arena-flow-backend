@@ -2,12 +2,9 @@ package za.co.lz.controller.team;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import za.co.lz.domain.team.Team;
-import za.co.lz.service.TeamServiceImpl;
+import za.co.lz.service.team.TeamServiceImpl;
 
 @RestController
 @RequestMapping("/api/team")
@@ -21,4 +18,6 @@ public class TeamController {
         Team createdTeam = teamService.create(team);
         return ResponseEntity.ok(createdTeam);
     }
+
+    @DeleteMapping("/delete/{id}")
 }

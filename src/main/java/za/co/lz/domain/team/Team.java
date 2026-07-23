@@ -3,17 +3,18 @@ package za.co.lz.domain.team;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
+import java.io.Serializable;
 import java.util.UUID;
 
 @Entity
-public class Team {
+public class Team implements Serializable {
     @Id
-    private UUID teamId;
-    private String teamName;
-    private int teamFormationYear;
-    private TeamType teamType;
+    protected UUID teamId;
+    protected String teamName;
+    protected int teamFormationYear;
+    protected TeamType teamType;
     // Inserting a team logo from device
-    private String teamLogo;
+    protected String teamLogo;
 
     public Team(){}
 

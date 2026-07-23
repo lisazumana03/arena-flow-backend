@@ -5,19 +5,20 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import za.co.lz.domain.Name;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.UUID;
 
 @Entity
-public class Player {
+public class Player implements Serializable {
     @Id
-    private UUID playerId;
+    protected UUID playerId;
     @Embedded
-    private Name playerName;
-    private PlayerGender playerGender;
-    private LocalDate playerDateOfBirth;
-    private PlayerPosition playerPosition;
-    private String playerNationality;
+    protected Name playerName;
+    protected PlayerGender playerGender;
+    protected LocalDate playerDateOfBirth;
+    protected PlayerPosition playerPosition;
+    protected String playerNationality;
 
     public Player(){}
 

@@ -1,7 +1,9 @@
 package za.co.lz.domain.team;
 
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import za.co.lz.domain.Name;
 
 import java.time.LocalDate;
 import java.util.UUID;
@@ -10,7 +12,9 @@ import java.util.UUID;
 public class Player {
     @Id
     private UUID playerId;
-    private String playerName;
+    @Embedded
+    private Name playerName;
+    private PlayerGender playerGender;
     private LocalDate playerDateOfBirth;
     private PlayerPosition playerPosition;
     private String playerNationality;
@@ -20,6 +24,7 @@ public class Player {
     private Player(Builder builder){
         this.playerId = builder.playerId;
         this.playerName = builder.playerName;
+        this.playerGender = builder.playerGender;
         this.playerDateOfBirth = builder.playerDateOfBirth;
         this.playerPosition = builder.playerPosition;
         this.playerNationality = builder.playerNationality;
@@ -29,9 +34,11 @@ public class Player {
         return playerId;
     }
 
-    public String getPlayerName() {
+    public Name getPlayerName() {
         return playerName;
     }
+
+    public PlayerGender getPlayerGender() {return playerGender;}
 
     public LocalDate getPlayerDateOfBirth() {
         return playerDateOfBirth;
@@ -47,7 +54,8 @@ public class Player {
 
     public static class Builder{
         private UUID playerId;
-        private String playerName;
+        private Name playerName;
+        private PlayerGender playerGender;
         private LocalDate playerDateOfBirth;
         private PlayerPosition playerPosition;
         private String playerNationality;
@@ -57,8 +65,13 @@ public class Player {
             return this;
         }
 
-        public Builder setPlayerName(String playerName){
+        public Builder setPlayerName(Name playerName){
             this.playerName = playerName;
+            return this;
+        }
+
+        public Builder setPlayerGender(PlayerGender playerGender){
+            this.playerGender = playerGender;
             return this;
         }
 
@@ -80,6 +93,7 @@ public class Player {
         public Builder copy(Player player){
             this.playerId = player.playerId;
             this.playerName = player.playerName;
+            this.playerGender = player.playerGender;
             this.playerDateOfBirth = player.playerDateOfBirth;
             this.playerPosition = player.playerPosition;
             this.playerNationality = player.playerNationality;

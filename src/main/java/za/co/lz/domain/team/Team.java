@@ -1,6 +1,8 @@
 package za.co.lz.domain.team;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 import java.io.Serializable;
@@ -9,12 +11,12 @@ import java.util.UUID;
 @Entity
 public class Team implements Serializable {
     @Id
-    protected UUID teamId;
-    protected String teamName;
-    protected int teamFormationYear;
-    protected TeamType teamType;
+    private UUID teamId;
+    private String teamName;
+    private int teamFormationYear;
+    private TeamType teamType;
     // Inserting a team logo from device
-    protected String teamLogo;
+    private byte[] teamLogo;
 
     public Team(){}
 
@@ -42,7 +44,7 @@ public class Team implements Serializable {
         return teamType;
     }
 
-    public String getTeamLogo() {
+    public byte[] getTeamLogo() {
         return teamLogo;
     }
 
@@ -61,7 +63,7 @@ public class Team implements Serializable {
         private String teamName;
         private int teamFormationYear;
         private TeamType teamType;
-        private String teamLogo;
+        private byte[] teamLogo;
         
         public Builder setTeamId(UUID teamId) {
             this.teamId = teamId;
@@ -83,7 +85,7 @@ public class Team implements Serializable {
             return this;
         }
 
-        public Builder setTeamLogo(String teamLogo) {
+        public Builder setTeamLogo(byte[] teamLogo) {
             this.teamLogo = teamLogo;
             return this;
         }

@@ -1,8 +1,6 @@
 package za.co.lz.domain.team;
 
-import jakarta.persistence.Embedded;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import za.co.lz.domain.Name;
 
 import java.io.Serializable;
@@ -12,13 +10,15 @@ import java.util.UUID;
 @Entity
 public class Player implements Serializable {
     @Id
-    protected UUID playerId;
+    private UUID playerId;
     @Embedded
-    protected Name playerName;
-    protected PlayerGender playerGender;
-    protected LocalDate playerDateOfBirth;
-    protected PlayerPosition playerPosition;
-    protected String playerNationality;
+    private Name playerName;
+    private PlayerGender playerGender;
+    private LocalDate playerDateOfBirth;
+    private PlayerPosition playerPosition;
+    private String playerNationality;
+    private double playerHeight;
+    private double playerWeight;
 
     public Player(){}
 
@@ -29,6 +29,8 @@ public class Player implements Serializable {
         this.playerDateOfBirth = builder.playerDateOfBirth;
         this.playerPosition = builder.playerPosition;
         this.playerNationality = builder.playerNationality;
+        this.playerHeight = builder.playerHeight;
+        this.playerWeight = builder.playerWeight;
     }
 
     public UUID getPlayerId() {
@@ -53,6 +55,28 @@ public class Player implements Serializable {
         return playerNationality;
     }
 
+    public double getPlayerHeight() {
+        return playerHeight;
+    }
+
+    public double getPlayerWeight() {
+        return playerWeight;
+    }
+
+    @Override
+    public String toString() {
+        return "Player{" +
+                "playerId=" + playerId +
+                ", playerName=" + playerName +
+                ", playerGender=" + playerGender +
+                ", playerDateOfBirth=" + playerDateOfBirth +
+                ", playerPosition=" + playerPosition +
+                ", playerNationality='" + playerNationality + '\'' +
+                ", playerHeight=" + playerHeight +
+                ", playerWeight=" + playerWeight +
+                '}';
+    }
+
     public static class Builder{
         private UUID playerId;
         private Name playerName;
@@ -60,6 +84,8 @@ public class Player implements Serializable {
         private LocalDate playerDateOfBirth;
         private PlayerPosition playerPosition;
         private String playerNationality;
+        private double playerHeight;
+        private double playerWeight;
 
         public Builder setPlayerId(UUID playerId){
             this.playerId = playerId;
@@ -91,6 +117,16 @@ public class Player implements Serializable {
             return this;
         }
 
+        public Builder setPlayerHeight(double playerHeight){
+            this.playerHeight = playerHeight;
+            return this;
+        }
+
+        public Builder setPlayerWeight(double playerWeight){
+            this.playerWeight = playerWeight;
+            return this;
+        }
+
         public Builder copy(Player player){
             this.playerId = player.playerId;
             this.playerName = player.playerName;
@@ -98,6 +134,8 @@ public class Player implements Serializable {
             this.playerDateOfBirth = player.playerDateOfBirth;
             this.playerPosition = player.playerPosition;
             this.playerNationality = player.playerNationality;
+            this.playerHeight = player.playerHeight;
+            this.playerWeight = player.playerWeight;
             return this;
         }
 

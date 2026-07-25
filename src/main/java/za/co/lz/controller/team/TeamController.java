@@ -1,12 +1,10 @@
 package za.co.lz.controller.team;
 
-import java.util.UUID;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import za.co.lz.domain.team.Team;
-import za.co.lz.service.team.TeamServiceImpl;
+import za.co.lz.service.team.impl.TeamServiceImpl;
 
 @RestController
 @RequestMapping("/api/team")

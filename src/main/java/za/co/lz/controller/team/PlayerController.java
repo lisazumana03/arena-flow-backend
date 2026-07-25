@@ -7,8 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import za.co.lz.domain.team.Player;
-import za.co.lz.repository.team.PlayerRepository;
-import za.co.lz.service.team.PlayerServiceImpl;
+import za.co.lz.service.team.impl.PlayerServiceImpl;
 
 @RestController
 @RequestMapping("/api/player")

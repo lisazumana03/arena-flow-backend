@@ -1,15 +1,16 @@
-package za.co.lz.service.team;
+package za.co.lz.service.team.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import za.co.lz.domain.team.Player;
 import za.co.lz.repository.team.PlayerRepository;
+import za.co.lz.service.team.IPlayerService;
 
 import java.util.List;
 import java.util.UUID;
 
 @Service
-public class PlayerServiceImpl implements IPlayerService{
+public class PlayerServiceImpl implements IPlayerService {
 
     @Autowired
     private PlayerRepository playerRepository;

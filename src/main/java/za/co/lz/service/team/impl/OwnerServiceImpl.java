@@ -2,7 +2,7 @@ package za.co.lz.service.team.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import za.co.lz.domain.team.Owner;
+import za.co.lz.domain.team.finances.Owner;
 import za.co.lz.repository.team.OwnerRepository;
 import za.co.lz.service.team.IOwnerService;
 
@@ -22,12 +22,12 @@ public class OwnerServiceImpl implements IOwnerService {
 
     @Override
     public List<Owner> findAll() {
-        return List.of();
+        return ownerRepository.findAll();
     }
 
     @Override
     public Owner update(Owner owner, UUID uuid) {
-        return null;
+        return ownerRepository.save(owner);
     }
 
     @Override

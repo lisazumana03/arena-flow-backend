@@ -4,14 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import za.co.lz.domain.team.Team;
-import za.co.lz.service.team.impl.TeamServiceImpl;
+import za.co.lz.service.team.ITeamService;
 
 @RestController
 @RequestMapping("/api/team")
 public class TeamController {
 
     @Autowired
-    private TeamServiceImpl teamService;
+    private ITeamService teamService;
 
     @PostMapping("/create")
     public ResponseEntity<Team> createTeam(@RequestBody Team team) {

@@ -7,6 +7,7 @@ import za.co.lz.repository.team.PlayerRepository;
 import za.co.lz.service.team.IPlayerService;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -23,6 +24,11 @@ public class PlayerServiceImpl implements IPlayerService {
     @Override
     public List<Player> findAll() {
         return playerRepository.findAll();
+    }
+
+    @Override
+    public Optional<Player> findById(UUID uuid) {
+        return playerRepository.findById(uuid);
     }
 
     @Override

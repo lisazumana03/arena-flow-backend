@@ -19,6 +19,9 @@ public class Player implements Serializable {
     private String playerNationality;
     private double playerHeight;
     private double playerWeight;
+    @ManyToOne
+    @JoinColumn(name = "team_id")
+    private Team team;
 
     public Player(){}
 
@@ -31,6 +34,7 @@ public class Player implements Serializable {
         this.playerNationality = builder.playerNationality;
         this.playerHeight = builder.playerHeight;
         this.playerWeight = builder.playerWeight;
+        this.team = builder.team;
     }
 
     public UUID getPlayerId() {
@@ -63,6 +67,10 @@ public class Player implements Serializable {
         return playerWeight;
     }
 
+    public Team getTeam() {
+        return team;
+    }
+
     @Override
     public String toString() {
         return "Player{" +
@@ -74,6 +82,7 @@ public class Player implements Serializable {
                 ", playerNationality='" + playerNationality + '\'' +
                 ", playerHeight=" + playerHeight +
                 ", playerWeight=" + playerWeight +
+                ", team=" + team +
                 '}';
     }
 
@@ -86,6 +95,7 @@ public class Player implements Serializable {
         private String playerNationality;
         private double playerHeight;
         private double playerWeight;
+        private Team team;
 
         public Builder setPlayerId(UUID playerId){
             this.playerId = playerId;
@@ -127,6 +137,11 @@ public class Player implements Serializable {
             return this;
         }
 
+        public Builder setTeam(Team team){
+            this.team = team;
+            return this;
+        }
+
         public Builder copy(Player player){
             this.playerId = player.playerId;
             this.playerName = player.playerName;
@@ -136,6 +151,7 @@ public class Player implements Serializable {
             this.playerNationality = player.playerNationality;
             this.playerHeight = player.playerHeight;
             this.playerWeight = player.playerWeight;
+            this.team = player.team;
             return this;
         }
 

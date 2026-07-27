@@ -31,6 +31,7 @@ public class Team implements Serializable {
         this.teamFormationYear = builder.teamFormationYear;
         this.teamType = builder.teamType;
         this.teamLogo = builder.teamLogo;
+        this.owner = builder.owner;
     }
 
     public UUID getTeamId() {
@@ -53,13 +54,21 @@ public class Team implements Serializable {
         return teamLogo;
     }
 
+    public Owner getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Owner owner) {
+        this.owner = owner;
+    }
+
     public String toString() {
         return "Team{" +
                 "teamId=" + teamId +
                 ", teamName='" + teamName + '\'' +
                 ", teamFormationYear=" + teamFormationYear +
                 ", teamType=" + teamType +
-                ", teamLogo='" + teamLogo + '\'' +
+                ", owner=" + (owner != null ? owner.getOwnerId() : "null") +
                 '}';
     }
 
@@ -69,6 +78,7 @@ public class Team implements Serializable {
         private int teamFormationYear;
         private TeamType teamType;
         private byte[] teamLogo;
+        private Owner owner;
         
         public Builder setTeamId(UUID teamId) {
             this.teamId = teamId;
@@ -95,16 +105,25 @@ public class Team implements Serializable {
             return this;
         }
 
+        public Builder setOwner(Owner owner) {
+            this.owner = owner;
+            return this;
+        }
+
         public Builder copy(Team team){
             this.teamId = team.teamId;
             this.teamName = team.teamName;
             this.teamFormationYear = team.teamFormationYear;
             this.teamType = team.teamType;
             this.teamLogo = team.teamLogo;
+            this.owner = team.owner;
             return this;
         }
 
         public Team build(){
+            if (owner == null) {
+                throw new IllegalStateException("Team must have an owner. Use setOwner() to assign an owner.");
+            }
             return new Team(this);
         }
     }

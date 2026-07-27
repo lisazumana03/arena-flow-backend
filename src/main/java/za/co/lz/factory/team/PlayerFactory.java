@@ -1,4 +1,4 @@
-package za.co.lz.factory;
+package za.co.lz.factory.team;
 
 import za.co.lz.domain.Name;
 import za.co.lz.domain.team.Player;

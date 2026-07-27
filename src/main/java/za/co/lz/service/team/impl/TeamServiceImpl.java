@@ -4,10 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import za.co.lz.domain.team.Team;
+import za.co.lz.domain.team.finances.Owner;
 import za.co.lz.repository.team.TeamRepository;
 import za.co.lz.service.team.ITeamService;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -27,6 +29,11 @@ public class TeamServiceImpl implements ITeamService {
     }
 
     @Override
+    public Optional<Team> findById(UUID teamId) {
+        return teamRepository.findById(teamId);
+    }
+
+    @Override
     public Team update(Team team, UUID teamId) {
         if (teamId == null) {
             return team;
@@ -37,5 +44,12 @@ public class TeamServiceImpl implements ITeamService {
     @Override
     public void delete(UUID teamId) {
         this.teamRepository.deleteById(teamId);
+    }
+
+    @Override
+    public List<Team> findTeamsByOwner(Owner owner) {
+        return teamRepository.findAll().stream()
+                .filter(team -> team.getOwner() != null && team.getOwner().getOwnerId().equals(owner.getOwnerId()))
+                .toList();
     }
 }

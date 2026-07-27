@@ -1,4 +1,4 @@
-package za.co.lz.repository.team;
+package za.co.lz.repository.team.finances;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.*;
 import za.co.lz.domain.team.Team;
 import za.co.lz.service.team.ITeamService;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/team")
 public class TeamController {
@@ -18,5 +20,7 @@ public class TeamController {
         Team createdTeam = teamService.create(team);
         return ResponseEntity.ok(createdTeam);
     }
+
+
 
 }

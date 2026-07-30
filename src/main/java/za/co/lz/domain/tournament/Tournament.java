@@ -23,16 +23,13 @@ public class Tournament implements Serializable {
 
     @Id
     private UUID tournamentId;
-
     private String tournamentName;
-
     @Enumerated(EnumType.STRING)
     private TournamentFormat format;
-
     private String description;
-
     @OneToMany(mappedBy = "tournament")
     private List<Season> seasons;
+    private byte[] tournamentLogo;
 
     public Tournament() {}
 
@@ -42,6 +39,7 @@ public class Tournament implements Serializable {
         this.format = builder.format;
         this.description = builder.description;
         this.seasons = builder.seasons;
+        this.tournamentLogo = builder.tournamentLogo;
     }
 
     public UUID getTournamentId() { return tournamentId; }
@@ -49,6 +47,7 @@ public class Tournament implements Serializable {
     public TournamentFormat getFormat() { return format; }
     public String getDescription() { return description; }
     public List<Season> getSeasons() { return seasons; }
+    public byte[] getLogo() {return tournamentLogo; }
 
     public void setDescription(String description) { this.description = description; }
     public void setSeasons(List<Season> seasons) { this.seasons = seasons; }
@@ -68,12 +67,17 @@ public class Tournament implements Serializable {
         private TournamentFormat format;
         private String description;
         private List<Season> seasons;
+        private byte[] tournamentLogo;
 
         public Builder setTournamentId(UUID tournamentId) { this.tournamentId = tournamentId; return this; }
         public Builder setTournamentName(String tournamentName) { this.tournamentName = tournamentName; return this; }
         public Builder setFormat(TournamentFormat format) { this.format = format; return this; }
         public Builder setDescription(String description) { this.description = description; return this; }
         public Builder setSeasons(List<Season> seasons) { this.seasons = seasons; return this; }
+        public Builder setTournamentLogo(byte[] tournamentLogo){
+            this.tournamentLogo = tournamentLogo;
+            return this;
+        }
 
         public Builder copy(Tournament tournament) {
             this.tournamentId = tournament.tournamentId;
@@ -81,6 +85,7 @@ public class Tournament implements Serializable {
             this.format = tournament.format;
             this.description = tournament.description;
             this.seasons = tournament.seasons;
+            this.tournamentLogo = tournament.tournamentLogo;
             return this;
         }
 

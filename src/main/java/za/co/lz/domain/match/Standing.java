@@ -24,6 +24,9 @@ public class Standing {
     @JoinColumn(name = "team_id", nullable = false)
     private Team team;
     
+    // e.g. "Group A" - null for seasons with no group stage (plain LEAGUE format)
+    private String groupName;
+    
     private int position; // 1st, 2nd, etc.
     private int gamesPlayed;
     private int wins;
@@ -40,6 +43,7 @@ public class Standing {
         this.standingId = builder.standingId;
         this.season = builder.season;
         this.team = builder.team;
+        this.groupName = builder.groupName;
         this.position = builder.position;
         this.gamesPlayed = builder.gamesPlayed;
         this.wins = builder.wins;
@@ -55,6 +59,7 @@ public class Standing {
     public UUID getStandingId() { return standingId; }
     public Season getSeason() { return season; }
     public Team getTeam() { return team; }
+    public String getGroupName() { return groupName; }
     public int getPosition() { return position; }
     public int getGamesPlayed() { return gamesPlayed; }
     public int getWins() { return wins; }
@@ -66,6 +71,7 @@ public class Standing {
     public int getPoints() { return points; }
     
     // Setters
+    public void setGroupName(String groupName) { this.groupName = groupName; }
     public void setPosition(int position) { this.position = position; }
     public void setGamesPlayed(int gamesPlayed) { this.gamesPlayed = gamesPlayed; }
     public void setWins(int wins) { this.wins = wins; }
@@ -111,6 +117,7 @@ public class Standing {
         private UUID standingId;
         private Season season;
         private Team team;
+        private String groupName;
         private int position;
         private int gamesPlayed;
         private int wins;
@@ -133,6 +140,11 @@ public class Standing {
         
         public Builder setTeam(Team team) {
             this.team = team;
+            return this;
+        }
+        
+        public Builder setGroupName(String groupName) {
+            this.groupName = groupName;
             return this;
         }
         

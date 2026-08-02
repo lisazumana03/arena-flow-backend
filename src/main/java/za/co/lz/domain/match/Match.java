@@ -36,7 +36,12 @@ public class Match {
     private MatchResult result;
     
     private LocalDateTime matchDate;
-    private String venue;
+    private String venue; // legacy free-text venue name, kept for backward compatibility
+
+    @ManyToOne
+    @JoinColumn(name = "venue_id")
+    private za.co.lz.domain.venue.Venue venueDetails; // structured venue (community ground / stadium)
+
     private int attendance;
     
     // Financial impact
@@ -62,6 +67,7 @@ public class Match {
         this.result = builder.result;
         this.matchDate = builder.matchDate;
         this.venue = builder.venue;
+        this.venueDetails = builder.venueDetails;
         this.attendance = builder.attendance;
         this.homeTeamRevenue = builder.homeTeamRevenue;
         this.awayTeamRevenue = builder.awayTeamRevenue;
@@ -80,6 +86,7 @@ public class Match {
     public MatchResult getResult() { return result; }
     public LocalDateTime getMatchDate() { return matchDate; }
     public String getVenue() { return venue; }
+    public za.co.lz.domain.venue.Venue getVenueDetails() { return venueDetails; }
     public int getAttendance() { return attendance; }
     public BigDecimal getHomeTeamRevenue() { return homeTeamRevenue; }
     public BigDecimal getAwayTeamRevenue() { return awayTeamRevenue; }
@@ -93,6 +100,7 @@ public class Match {
     public void setHomeScore(int homeScore) { this.homeScore = homeScore; }
     public void setAwayScore(int awayScore) { this.awayScore = awayScore; }
     public void setAttendance(int attendance) { this.attendance = attendance; }
+    public void setVenueDetails(za.co.lz.domain.venue.Venue venueDetails) { this.venueDetails = venueDetails; }
     public void setHomeTeamRevenue(BigDecimal revenue) { this.homeTeamRevenue = revenue; }
     public void setAwayTeamRevenue(BigDecimal revenue) { this.awayTeamRevenue = revenue; }
     public void setHomeTeamExpenses(BigDecimal expenses) { this.homeTeamExpenses = expenses; }
@@ -121,6 +129,7 @@ public class Match {
         private MatchResult result;
         private LocalDateTime matchDate;
         private String venue;
+        private za.co.lz.domain.venue.Venue venueDetails;
         private int attendance;
         private BigDecimal homeTeamRevenue;
         private BigDecimal awayTeamRevenue;
@@ -170,6 +179,11 @@ public class Match {
         
         public Builder setVenue(String venue) {
             this.venue = venue;
+            return this;
+        }
+        
+        public Builder setVenueDetails(za.co.lz.domain.venue.Venue venueDetails) {
+            this.venueDetails = venueDetails;
             return this;
         }
         

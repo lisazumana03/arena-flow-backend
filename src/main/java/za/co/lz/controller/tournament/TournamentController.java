@@ -40,6 +40,14 @@ public class TournamentController {
         return ResponseEntity.ok(tournament);
     }
 
+    // Exposes ITournamentService.update(), which previously had no route — added so fields
+    // that create() doesn't accept (currently just the logo) can still be set after creation.
+    @PutMapping("/{tournamentId}")
+    public ResponseEntity<Tournament> updateTournament(@PathVariable UUID tournamentId, @RequestBody Tournament tournament) {
+        Tournament updated = tournamentService.update(tournament, tournamentId);
+        return ResponseEntity.ok(updated);
+    }
+
     @GetMapping
     public ResponseEntity<List<Tournament>> getAllTournaments() {
         return ResponseEntity.ok(tournamentService.findAll());

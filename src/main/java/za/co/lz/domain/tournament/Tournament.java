@@ -36,6 +36,12 @@ public class Tournament implements Serializable {
     @OneToMany(mappedBy = "tournament")
     private List<Season> seasons;
     private byte[] tournamentLogo;
+    // Only meaningful for LEAGUE/HYBRID formats that produce a standings table.
+    // How many of the top places earn promotion (e.g. 3 for a second-tier league).
+    // 0 = promotion/relegation colouring is not applicable to this tournament.
+    private int promotionSpots;
+    // How many of the bottom places are relegated (e.g. 3 for a top-flight league).
+    private int relegationSpots;
 
     public Tournament() {}
 
@@ -46,6 +52,8 @@ public class Tournament implements Serializable {
         this.description = builder.description;
         this.seasons = builder.seasons;
         this.tournamentLogo = builder.tournamentLogo;
+        this.promotionSpots = builder.promotionSpots;
+        this.relegationSpots = builder.relegationSpots;
     }
 
     public UUID getTournamentId() { return tournamentId; }
@@ -54,9 +62,13 @@ public class Tournament implements Serializable {
     public String getDescription() { return description; }
     public List<Season> getSeasons() { return seasons; }
     public byte[] getLogo() {return tournamentLogo; }
+    public int getPromotionSpots() { return promotionSpots; }
+    public int getRelegationSpots() { return relegationSpots; }
 
     public void setDescription(String description) { this.description = description; }
     public void setSeasons(List<Season> seasons) { this.seasons = seasons; }
+    public void setPromotionSpots(int promotionSpots) { this.promotionSpots = promotionSpots; }
+    public void setRelegationSpots(int relegationSpots) { this.relegationSpots = relegationSpots; }
 
     @Override
     public String toString() {
@@ -64,6 +76,8 @@ public class Tournament implements Serializable {
                 "tournamentId=" + tournamentId +
                 ", tournamentName='" + tournamentName + '\'' +
                 ", format=" + format +
+                ", promotionSpots=" + promotionSpots +
+                ", relegationSpots=" + relegationSpots +
                 '}';
     }
 
@@ -74,6 +88,8 @@ public class Tournament implements Serializable {
         private String description;
         private List<Season> seasons;
         private byte[] tournamentLogo;
+        private int promotionSpots;
+        private int relegationSpots;
 
         public Builder setTournamentId(UUID tournamentId) { this.tournamentId = tournamentId; return this; }
         public Builder setTournamentName(String tournamentName) { this.tournamentName = tournamentName; return this; }
@@ -84,6 +100,8 @@ public class Tournament implements Serializable {
             this.tournamentLogo = tournamentLogo;
             return this;
         }
+        public Builder setPromotionSpots(int promotionSpots) { this.promotionSpots = promotionSpots; return this; }
+        public Builder setRelegationSpots(int relegationSpots) { this.relegationSpots = relegationSpots; return this; }
 
         public Builder copy(Tournament tournament) {
             this.tournamentId = tournament.tournamentId;
@@ -92,6 +110,8 @@ public class Tournament implements Serializable {
             this.description = tournament.description;
             this.seasons = tournament.seasons;
             this.tournamentLogo = tournament.tournamentLogo;
+            this.promotionSpots = tournament.promotionSpots;
+            this.relegationSpots = tournament.relegationSpots;
             return this;
         }
 
@@ -99,6 +119,8 @@ public class Tournament implements Serializable {
             if (tournamentId == null) throw new IllegalStateException("Tournament ID is required");
             if (tournamentName == null || tournamentName.isBlank()) throw new IllegalStateException("Tournament name is required");
             if (format == null) throw new IllegalStateException("Tournament format is required");
+            if (promotionSpots < 0) throw new IllegalStateException("Promotion spots cannot be negative");
+            if (relegationSpots < 0) throw new IllegalStateException("Relegation spots cannot be negative");
             return new Tournament(this);
         }
     }

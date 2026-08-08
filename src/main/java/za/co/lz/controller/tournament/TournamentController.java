@@ -36,7 +36,8 @@ public class TournamentController {
     @PostMapping("/create")
     public ResponseEntity<Tournament> createTournament(@RequestBody TournamentCreateRequest request) {
         Tournament tournament = tournamentService.createTournament(
-                request.getTournamentName(), request.getFormat(), request.getDescription());
+                request.getTournamentName(), request.getFormat(), request.getDescription(),
+                request.getPromotionSpots(), request.getRelegationSpots());
         return ResponseEntity.ok(tournament);
     }
 
@@ -134,10 +135,14 @@ public class TournamentController {
         private String tournamentName;
         private TournamentFormat format;
         private String description;
+        private int promotionSpots;
+        private int relegationSpots;
 
         public String getTournamentName() { return tournamentName; }
         public TournamentFormat getFormat() { return format; }
         public String getDescription() { return description; }
+        public int getPromotionSpots() { return promotionSpots; }
+        public int getRelegationSpots() { return relegationSpots; }
     }
 
     public static class EditionCreateRequest {

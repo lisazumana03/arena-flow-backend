@@ -50,7 +50,8 @@ public class TournamentServiceImpl implements ITournamentService {
     }
 
     @Override
-    public Tournament createTournament(String tournamentName, TournamentFormat format, String description) {
+    public Tournament createTournament(String tournamentName, TournamentFormat format, String description,
+                                        int promotionSpots, int relegationSpots) {
         Optional<Tournament> existing = tournamentRepository.findByTournamentName(tournamentName);
         if (existing.isPresent()) {
             throw new IllegalArgumentException("Tournament '" + tournamentName + "' already exists");
@@ -61,6 +62,8 @@ public class TournamentServiceImpl implements ITournamentService {
                 .setTournamentName(tournamentName)
                 .setFormat(format)
                 .setDescription(description)
+                .setPromotionSpots(promotionSpots)
+                .setRelegationSpots(relegationSpots)
                 .build();
 
         return tournamentRepository.save(tournament);

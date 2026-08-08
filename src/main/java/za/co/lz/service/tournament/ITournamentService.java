@@ -11,7 +11,8 @@ import java.util.UUID;
 
 public interface ITournamentService extends IService<Tournament, UUID> {
 
-    Tournament createTournament(String tournamentName, TournamentFormat format, String description);
+    Tournament createTournament(String tournamentName, TournamentFormat format, String description,
+                                 int promotionSpots, int relegationSpots);
 
     Tournament getTournament(String tournamentName);
 

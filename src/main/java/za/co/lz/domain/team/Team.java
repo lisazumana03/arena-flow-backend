@@ -16,6 +16,12 @@ public class Team implements Serializable {
     private String teamName;
     private int teamFormationYear;
     private TeamType teamType;
+    // Male/female side the team competes in
+    private PlayerGender teamGender;
+    // Whether the team runs a youth academy
+    private boolean hasYouthAcademy;
+    // Country the team represents/is based in (e.g. "England")
+    private String teamNationality;
     // Inserting a team logo from device
     private byte[] teamLogo;
     // Ownership attributes
@@ -30,6 +36,9 @@ public class Team implements Serializable {
         this.teamName = builder.teamName;
         this.teamFormationYear = builder.teamFormationYear;
         this.teamType = builder.teamType;
+        this.teamGender = builder.teamGender;
+        this.hasYouthAcademy = builder.hasYouthAcademy;
+        this.teamNationality = builder.teamNationality;
         this.teamLogo = builder.teamLogo;
         this.owner = builder.owner;
     }
@@ -50,6 +59,30 @@ public class Team implements Serializable {
         return teamType;
     }
 
+    public PlayerGender getTeamGender() {
+        return teamGender;
+    }
+
+    public boolean isHasYouthAcademy() {
+        return hasYouthAcademy;
+    }
+
+    public String getTeamNationality() {
+        return teamNationality;
+    }
+
+    public void setTeamGender(PlayerGender teamGender) {
+        this.teamGender = teamGender;
+    }
+
+    public void setHasYouthAcademy(boolean hasYouthAcademy) {
+        this.hasYouthAcademy = hasYouthAcademy;
+    }
+
+    public void setTeamNationality(String teamNationality) {
+        this.teamNationality = teamNationality;
+    }
+
     public byte[] getTeamLogo() {
         return teamLogo;
     }
@@ -68,6 +101,9 @@ public class Team implements Serializable {
                 ", teamName='" + teamName + '\'' +
                 ", teamFormationYear=" + teamFormationYear +
                 ", teamType=" + teamType +
+                ", teamGender=" + teamGender +
+                ", hasYouthAcademy=" + hasYouthAcademy +
+                ", teamNationality='" + teamNationality + '\'' +
                 ", owner=" + (owner != null ? owner.getOwnerId() : "null") +
                 '}';
     }
@@ -77,6 +113,9 @@ public class Team implements Serializable {
         private String teamName;
         private int teamFormationYear;
         private TeamType teamType;
+        private PlayerGender teamGender;
+        private boolean hasYouthAcademy;
+        private String teamNationality;
         private byte[] teamLogo;
         private Owner owner;
         
@@ -100,6 +139,21 @@ public class Team implements Serializable {
             return this;
         }
 
+        public Builder setTeamGender(PlayerGender teamGender) {
+            this.teamGender = teamGender;
+            return this;
+        }
+
+        public Builder setHasYouthAcademy(boolean hasYouthAcademy) {
+            this.hasYouthAcademy = hasYouthAcademy;
+            return this;
+        }
+
+        public Builder setTeamNationality(String teamNationality) {
+            this.teamNationality = teamNationality;
+            return this;
+        }
+
         public Builder setTeamLogo(byte[] teamLogo) {
             this.teamLogo = teamLogo;
             return this;
@@ -115,6 +169,9 @@ public class Team implements Serializable {
             this.teamName = team.teamName;
             this.teamFormationYear = team.teamFormationYear;
             this.teamType = team.teamType;
+            this.teamGender = team.teamGender;
+            this.hasYouthAcademy = team.hasYouthAcademy;
+            this.teamNationality = team.teamNationality;
             this.teamLogo = team.teamLogo;
             this.owner = team.owner;
             return this;

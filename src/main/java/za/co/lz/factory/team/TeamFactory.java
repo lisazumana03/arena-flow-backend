@@ -1,5 +1,6 @@
 package za.co.lz.factory.team;
 
+import za.co.lz.domain.team.PlayerGender;
 import za.co.lz.domain.team.Team;
 import za.co.lz.domain.team.TeamType;
 import za.co.lz.domain.team.finances.Owner;
@@ -11,18 +12,27 @@ import za.co.lz.domain.team.finances.Owner;
  * up front so a Team can never be created "ownerless".
  */
 public class TeamFactory {
-    public static Team createClub(int teamFormationYear, Owner owner) {
+    public static Team createClub(int teamFormationYear, Owner owner, PlayerGender teamGender,
+                                   boolean hasYouthAcademy, String teamNationality) {
         return new Team.Builder()
                 .setTeamFormationYear(teamFormationYear)
                 .setTeamType(TeamType.CLUB)
+                .setTeamGender(teamGender)
+                .setHasYouthAcademy(hasYouthAcademy)
+                .setTeamNationality(teamNationality)
                 .setOwner(owner)
                 .build();
     }
 
-    public static Team createNationalTeam(int teamFormationYear, Owner owner) {
+    public static Team createNationalTeam(int teamFormationYear, Owner owner, PlayerGender teamGender,
+                                           String teamNationality) {
         return new Team.Builder()
                 .setTeamFormationYear(teamFormationYear)
                 .setTeamType(TeamType.NATIONAL)
+                .setTeamGender(teamGender)
+                // National teams don't run youth academies in their own right.
+                .setHasYouthAcademy(false)
+                .setTeamNationality(teamNationality)
                 .setOwner(owner)
                 .build();
     }

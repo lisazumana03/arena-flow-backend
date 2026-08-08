@@ -71,6 +71,10 @@ public class Player implements Serializable {
         return team;
     }
 
+    public void setTeam(Team team) {
+        this.team = team;
+    }
+
     @Override
     public String toString() {
         return "Player{" +

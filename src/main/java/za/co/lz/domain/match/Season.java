@@ -1,5 +1,6 @@
 package za.co.lz.domain.match;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import za.co.lz.domain.team.Team;
 import za.co.lz.domain.tournament.Tournament;
@@ -34,9 +35,16 @@ public class Season {
     @Enumerated(EnumType.STRING)
     private SeasonStatus status;
     
+    // JsonIgnore breaks Season -> matches -> Match -> season -> matches -> ... and
+    // Season -> standings -> Standing -> season -> standings -> ... cycles. Frontend
+    // fetches matches and standings for a season via their own dedicated endpoints
+    // (/api/matches/season/{id}, /api/seasons/{id}/standings) — never nested inside a
+    // Season response — so nothing relies on these two fields being serialized here.
+    @JsonIgnore
     @OneToMany(mappedBy = "season", cascade = CascadeType.ALL)
     private List<Match> matches;
     
+    @JsonIgnore
     @OneToMany(mappedBy = "season", cascade = CascadeType.ALL)
     private List<Standing> standings;
     

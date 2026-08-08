@@ -12,6 +12,7 @@ import za.co.lz.service.team.impl.TeamServiceImpl;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 @RestController
@@ -90,9 +91,9 @@ public class MatchController {
     }
     
     @PostMapping("/{matchId}/update-standings")
-    public ResponseEntity<String> updateStandings(@PathVariable UUID matchId) {
+    public ResponseEntity<Map<String, String>> updateStandings(@PathVariable UUID matchId) {
         matchService.updateStandingsAfterMatch(matchId);
-        return ResponseEntity.ok("Standings updated for match " + matchId);
+        return ResponseEntity.ok(Map.of("message", "Standings updated for match " + matchId));
     }
     
     // Inner classes for API

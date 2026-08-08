@@ -10,6 +10,7 @@ import za.co.lz.service.match.impl.StandingServiceImpl;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 @RestController
@@ -81,9 +82,9 @@ public class SeasonController {
     }
     
     @PostMapping("/{seasonId}/recalculate-standings")
-    public ResponseEntity<String> recalculateStandings(@PathVariable UUID seasonId) {
+    public ResponseEntity<Map<String, String>> recalculateStandings(@PathVariable UUID seasonId) {
         standingService.recalculateStandings(seasonId);
-        return ResponseEntity.ok("Standings recalculated for season " + seasonId);
+        return ResponseEntity.ok(Map.of("message", "Standings recalculated for season " + seasonId));
     }
     
     // Inner class for API

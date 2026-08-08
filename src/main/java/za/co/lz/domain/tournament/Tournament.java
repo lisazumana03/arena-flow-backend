@@ -1,5 +1,6 @@
 package za.co.lz.domain.tournament;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import za.co.lz.domain.match.Season;
 
@@ -27,6 +28,11 @@ public class Tournament implements Serializable {
     @Enumerated(EnumType.STRING)
     private TournamentFormat format;
     private String description;
+    // JsonIgnore breaks the Tournament -> seasons -> Season -> tournament -> seasons -> ...
+    // cycle. Frontend never needs seasons nested inside a Tournament response anyway —
+    // editions are always fetched via the dedicated /tournaments/{id}/editions endpoint,
+    // which still returns Season.tournament (now cycle-free, since this side is ignored).
+    @JsonIgnore
     @OneToMany(mappedBy = "tournament")
     private List<Season> seasons;
     private byte[] tournamentLogo;
